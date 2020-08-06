@@ -12,12 +12,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedAttributeNode;
+import javax.persistence.NamedEntityGraph;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="COURSE")
+@NamedEntityGraph(name="Course.Basic",attributeNodes={
+		@NamedAttributeNode("statistics")
+})
 public class Course {
 
 	@Id
