@@ -67,10 +67,10 @@
 	<!-- page -->
 	
 	<!-- COMMON SCRIPTS -->
-    <script src="resources/js/jquery-2.2.4.min.js"></script>
-    <script src="resources/js/common_scripts.js"></script>
-    <script src="resources/js/main.js"></script>
-	<script src="resources/assets/validate.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/jquery-2.2.4.min.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/common_scripts.js"></script>
+    <script src="${pageContext.request.contextPath}/resources/js/main.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/assets/validate.js"></script>
   
 </body>
 </html>
