@@ -1,8 +1,8 @@
 package com.seniorsteps.app.service;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import com.seniorsteps.app.filters.CourseFilter;
@@ -19,15 +19,17 @@ public class CourseService {
 	@Autowired
 	CourseRepository courseRepository;
 
-	public List<Course> list(CourseFilter filter) {
+	public Page<Course> list(CourseFilter filter) {
 
-		List<Course> courses = courseRepository.findAll(filter);
-
+		if(filter.getSize() == 0) filter.setSize(5);
+		
+		Page<Course> courses = courseRepository
+				.findAll(filter, PageRequest.of(filter.getPage(),filter.getSize()));
 		return courses;
 	}
 
 	public Course findById(int courseId) {
-		return courseRepository.findById(courseId).get();
+		return courseRepository.findCourseById(courseId);
 	}
 
 }

@@ -14,14 +14,20 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedAttributeNode;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedEntityGraphs;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
 @Table(name="COURSE")
+@NamedEntityGraphs({
 @NamedEntityGraph(name="Course.Basic",attributeNodes={
 		@NamedAttributeNode("statistics")
+}),
+@NamedEntityGraph(name="Course.Details",attributeNodes={
+		@NamedAttributeNode("contents")
+})
 })
 public class Course {
 
