@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,11 @@
 		<section class="hero_single version_2">
 			<div class="wrapper">
 				<div class="container">
-					<h3>What would you learn?</h3>
+					<h3>What would you learn
+					<security:authorize access="isAuthenticated()">
+					    <security:authentication property="principal.user.id" /> 
+					</security:authorize>
+					?</h3>
 					<p>Increase your expertise in business, technology and personal
 						development</p>
 					<form method="get"
@@ -87,9 +92,9 @@
 								${course.statistics.contentTotalTime}</li>
 							<li><i class="icon-user-add"></i>
 								${course.statistics.enrollmentCount}</li>
-							<sec:authorize access="hasAuthority('STUDENT')">
+							<security:authorize access="hasAuthority('STUDENT')">
 								<li><a href="course-detail.html">Enroll now</a></li>
-							</sec:authorize>
+							</security:authorize>
 						</ul>
 					</div>
 				</div>

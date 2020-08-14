@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ include file="/views/tiles/header.jsp" %>
 
 <body id="login_bg">
@@ -13,11 +13,15 @@
 	<!-- End Preload -->
 	
 	<div id="login">
+	
 		<aside>
 			<figure>
 				<a href="${pageContext.request.contextPath}/">
 				<img src="${pageContext.request.contextPath}/resources/img/logo.png" width="149" height="42" data-retina="true" alt=""></a>
 			</figure>
+			<c:if test="${param.error != null}" >
+				Error happened while logged in
+			</c:if>
 			  <form method="post" action="${pageContext.request.contextPath}/login" name="form">
 				<div class="form-group">
 					<span class="input">

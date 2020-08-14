@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 
 <header class="header menu_2">
 	<div id="preloader">
@@ -17,20 +18,23 @@
 			width="149" height="42" data-retina="true" alt=""></a>
 	</div>
 	<ul id="top_menu">
-		
-		<li><a href="${pageContext.request.contextPath}/login"
+		<security:authorize access="!isAuthenticated()">
+			<li><a href="${pageContext.request.contextPath}/login"
 				class="login">Login</a></li>
+		</security:authorize>
 		
 		<li><a href="#0" class="search-overlay-menu-btn">Search</a></li>
-		
-		<li class="hidden_tablet"><a
+
+		<security:authorize access="isAuthenticated()">
+			<li class="hidden_tablet"><a
 			href="${pageContext.request.contextPath}/logout"
 			class="btn_1 rounded">Logout</a></li>
-	
-	
-		<li class="hidden_tablet"><a href="admission.html"
-			class="btn_1 rounded">Register</a></li>
+		</security:authorize>
 		
+		<security:authorize access="!isAuthenticated()">
+			<li class="hidden_tablet"><a href="admission.html"
+				class="btn_1 rounded">Register</a></li>
+		</security:authorize>
 	</ul>
 	<!-- /top_menu -->
 	<a href="#menu" class="btn_mobile">
@@ -51,7 +55,9 @@
 					</c:forEach>
 				</ul></li>
 			<li><span><a href="#0">Blog</a></span></li>
-			<li><span><a href="#0">Instructor</a></span></li>
+			<security:authorize access="hasAuthority('INSTRUCTOR')">
+				<li><span><a href="#0">Instructor</a></span></li>
+			</security:authorize>
 			<li><span><a href="#0">About</a></span></li>
 		</ul>
 	</nav>
